@@ -1,0 +1,25 @@
+const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+
+const SignupValidation = (values) => {
+  let errors = {};
+
+  if (!values.name) {
+    errors.name = "Name is required";
+  }
+
+  if (!values.email) {
+    errors.email = "Email is required";
+  } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+    errors.email = "Email address is invalid";
+  }
+
+  if (!values.password) {
+    errors.password = "Password is required";
+  } else if (!password_pattern.test(values.password)) {
+    errors.password = "Password must be at least 8 characters long, contain at least one digit, one lowercase letter, and one uppercase letter";
+  }
+
+  return errors;
+};
+
+export default SignupValidation;
